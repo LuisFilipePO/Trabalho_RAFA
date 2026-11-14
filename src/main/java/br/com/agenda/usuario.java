@@ -1,6 +1,6 @@
 package br.com.agenda;
-
 public class Usuario {
+    private long id;
     private String nome;
     private String email;
     private String senha;
@@ -9,6 +9,7 @@ public class Usuario {
     }
 
     public Usuario(String nome, String email, String senha) {
+        this.id = 0; // O ID será gerado automaticamente pelo banco de dados
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -41,7 +42,8 @@ public class Usuario {
 
     public String toString() {
         return "Usuario{" +
-                "nome='" + nome + '\'' +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 '}';

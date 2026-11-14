@@ -18,10 +18,26 @@ public class Agenda {
         this.compromissos.remove(compromisso);
     }
 
-    public List<Compromisso> getCompromissos() {
+    public void atualizarCompromisso(Compromisso compromissoAntigo, Compromisso compromissoNovo) {
+        int index = this.compromissos.indexOf(compromissoAntigo);
+        if (index != -1) {
+            this.compromissos.set(index, compromissoNovo);
+        } else {
+            System.out.println("Compromisso não encontrado na agenda.");
+        }
+    }
+
+    public void listarCompromissos() {
         if (this.compromissos.isEmpty()) {
             System.out.println("A agenda está vazia.");
+        } else {
+            for (Compromisso compromisso : this.compromissos) {
+                System.out.println(compromisso);
+            }
         }
-        return this.compromissos;
+    }
+
+    public List<Compromisso> getCompromissos() {
+        return compromissos;
     }
 }
