@@ -7,15 +7,25 @@ public class Compromisso {
     private int id;
     private String titulo;
     private LocalDateTime dataHora;
+    private String descricao;
     private String local;
 
     public Compromisso() {
     }
 
    
-    public Compromisso(int id, String titulo, LocalDateTime dataHora, String local) {
+    public Compromisso(String titulo, LocalDateTime dataHora, String descricao, String local) {
+        this.id = 0; // O ID será gerado automaticamente pelo banco de dados
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.dataHora = dataHora;
+        this.local = local;
+    }
+
+    public Compromisso(int id, String titulo, LocalDateTime dataHora, String descricao, String local) {
         this.id = id;
         this.titulo = titulo;
+        this.descricao = descricao;
         this.dataHora = dataHora;
         this.local = local;
     }
@@ -26,16 +36,20 @@ public class Compromisso {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getTitulo() {
         return titulo;
     }
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public LocalDateTime getDataHora() {
@@ -54,7 +68,6 @@ public class Compromisso {
         this.local = local;
     }
 
-    // --- Métodos Adicionais ---
 
     //Data formatada para exibição
     public String getDataHoraFormatada() {
@@ -71,6 +84,7 @@ public class Compromisso {
                 "ID: " + id +
                 " | Título: '" + titulo + '\'' +
                 " | Data/Hora: " + getDataHoraFormatada() +
+                " | Descrição: '" + descricao + '\'' +
                 " | Local: '" + local + '\'' +
                 ']';
     }
