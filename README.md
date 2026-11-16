@@ -46,6 +46,7 @@ src/
 ├── main/java/br/com/agenda/
 │   ├── Agenda.java
 │   ├── App.java
+│   ├── AssistenteIA.java
 │   ├── Compromisso.java
 │   ├── DatabaseConnection.java
 │   └── Usuario.java
