@@ -1,36 +1,43 @@
+
 package br.com.agenda;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Compromisso {
+
     private int id;
     private String titulo;
     private LocalDateTime dataHora;
     private String descricao;
     private String local;
 
+    private static final DateTimeFormatter FORMATADOR =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    // Construtor vazio
     public Compromisso() {
     }
 
-   
-    public Compromisso(String titulo, LocalDateTime dataHora, String descricao, String local) {
-        this.id = 0; // O ID será gerado automaticamente pelo banco de dados
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.dataHora = dataHora;
-        this.local = local;
+    // Construtor para novos compromissos
+    public Compromisso(String titulo, LocalDateTime dataHora,
+                       String descricao, String local) {
+
+        setTitulo(titulo);
+        setDataHora(dataHora);
+        setDescricao(descricao);
+        setLocal(local);
     }
 
-    public Compromisso(int id, String titulo, LocalDateTime dataHora, String descricao, String local) {
+    // Construtor para compromissos existentes no banco
+    public Compromisso(int id, String titulo, LocalDateTime dataHora,
+                       String descricao, String local) {
+
+        this(titulo, dataHora, descricao, local);
         this.id = id;
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.dataHora = dataHora;
-        this.local = local;
     }
 
-    //Getters e Setters
+    // Getters e Setters
 
     public int getId() {
         return id;
@@ -41,7 +48,27 @@ public class Compromisso {
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        if (titulo == null || titulo.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "O título do compromisso é obrigatório."
+            );
+        }
+
+        this.titulo = titulo.trim();
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(LocalDateTime dataHora) {
+        if (dataHora == null) {
+            throw new IllegalArgumentException(
+                    "A data e hora do compromisso são obrigatórias."
+            );
+        }
+
+        this.dataHora = dataHora;
     }
 
     public String getDescricao() {
@@ -52,31 +79,31 @@ public class Compromisso {
         this.descricao = descricao;
     }
 
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
-    }
-
     public String getLocal() {
         return local;
     }
 
     public void setLocal(String local) {
-        this.local = local;
-    }
-
-
-    //Data formatada para exibição
-    public String getDataHoraFormatada() {
-        if (this.dataHora != null) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-            return this.dataHora.format(formatter);
+        if (local == null || local.trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "O local do compromisso é obrigatório."
+            );
         }
-        return "Data não definida";
+
+        this.local = local.trim();
     }
+
+    // Formatação da data e hora
+
+    public String getDataHoraFormatada() {
+        if (dataHora == null) {
+            return "Data não definida";
+        }
+
+        return dataHora.format(FORMATADOR);
+    }
+
+    // Representação textual
 
     @Override
     public String toString() {
